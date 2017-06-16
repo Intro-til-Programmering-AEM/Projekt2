@@ -17,13 +17,13 @@ def turtleGraph(string):
         rightTurn = (-2/3)*m.pi
         scale_factor = 1/3
         vars_factor = 4
-    vars, consts, _, _ = system
-    num_vars = sum(string.count(v) for v in vars)
+    variables, consts, _, _ = system
+    num_vars = sum(string.count(v) for v in variables)
     i = m.log(num_vars, vars_factor)
     scale = scale_factor**i
     pairs = []
     for c in string:
-        line_length = scale if c in vars else 0
+        line_length = scale if c in variables else 0
         if c == 'L':
             angle = leftTurn
         elif c == 'R':

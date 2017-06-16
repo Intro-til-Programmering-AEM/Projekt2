@@ -20,9 +20,9 @@ def step_unsafe(system, string):
 # Errors: Throws AssertionError if not all symbols in the input string are valid.
 def step(system, string):
     # Unpacks tuple
-    vars, consts, _, _ = system
+    variables, consts, _, _ = system
     # Concatenates the two lists to form a list of all valid symbols
-    symbols = vars + consts
+    symbols = variables + consts
     if not all(c in symbols for c in string):
         raise AssertionError("Lindenmayer string contains illegal symbols")
     return step_unsafe(system, string)
