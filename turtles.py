@@ -1,6 +1,26 @@
 import numpy as np
 import math as m
-turtleCommands=np.array([1,0.5,1.5,0.2,1])
+import systems
+
+def turtleGraph(string):
+    leftTurn = (1/3)*m.pi
+    # Is the string from the L-system for a Sierpinski triangle?
+    if 'A' in string:
+        system = systems.sierpinski
+        rightTurn = (-1/3)*m.pi
+        scale_factor = 1/2
+        vars_factor = 3
+    # If not, it's from the Koch curve
+    else:
+        system = systems.koch
+        rightTurn = (-2/3)*m.pi
+        scale_factor = 1/3
+        vars_factor = 4
+    num_vars = sum(string.count(v) for v in system[0])
+    i = m.log(num_vars, vars_factor)
+    scale = scale_factor**i
+    string = filter(lambda c: c in ['R','L'], string)
+    return [(scale,rightTurn if c == 'R' else leftTurn) for c in string]
 
 def turtlePlot(turtleCommands):
     x=np.array([0,0])
