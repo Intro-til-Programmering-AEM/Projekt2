@@ -45,9 +45,19 @@ names = {
     "Sierpinski": sierpinski
 }
 
+# Iterates an L-system N times from the initial string
+# Inputs: a string `System` naming the L-system to be iterated;
+# a non-negative integer `N`, the number of iterations to be performed.
+# Output: a string of valid symbols.
+# Assumptions: `System` is a key of `names`,
+# `N` is a non-negative integer
+# (iterating 0 times returns the initial string)
 def LindIter(System, N):
+    # Look up tuple of system description based on input string
     system = names[System]
+    # last tuple element is the initial string
     string = system[3]
+    # Repeatedly iterate
     for _ in range(N):
         string = step_unsafe(system, string)
     return string
