@@ -15,3 +15,14 @@ sierpinski_dict = {
 
 sierpinski = (['A','B'], ['L','R'], sierpinski_dict, "A")
 
+names = {
+    "Koch": koch,
+    "Sierpinski": sierpinski
+}
+
+def LindIter(System, N):
+    system = names[System]
+    string = system[3]
+    for _ in range(N):
+        string = step(system, string)
+    return string
