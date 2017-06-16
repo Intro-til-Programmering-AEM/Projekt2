@@ -17,11 +17,21 @@ def turtleGraph(string):
         rightTurn = (-2/3)*m.pi
         scale_factor = 1/3
         vars_factor = 4
-    num_vars = sum(string.count(v) for v in system[0])
+    vars, consts, _, _ = system
+    num_vars = sum(string.count(v) for v in vars)
     i = m.log(num_vars, vars_factor)
     scale = scale_factor**i
-    string = filter(lambda c: c in ['R','L'], string)
-    return [(scale,rightTurn if c == 'R' else leftTurn) for c in string]
+    pairs = []
+    for c in string:
+        line_length = scale if c in vars else 0
+        if c == 'L':
+            angle = leftTurn
+        elif c == 'R':
+            angle = rightTurn
+        else:
+            angle = 0
+        pairs.append((line_length, angle))
+    return [item for pair in pairs for item in pair]
 
 def turtlePlot(turtleCommands):
     x=np.array([0,0])
