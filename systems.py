@@ -12,6 +12,8 @@ def step_unsafe(system, string):
     # Variable symbols are mapped according to the replacement rules of the L-system
     # Joins all resulting strings into a single string of symbols, and returns it
     # DISCUSS too dense? maybe should be done in several steps
+    # Making it less dense will (surprisingly) not have a significant performance impact
+    # See branch less-dense-step
     return "".join(map(lambda s: str(s) if s in consts else dict[s], string))
 
 # Iterates an L-system once.
