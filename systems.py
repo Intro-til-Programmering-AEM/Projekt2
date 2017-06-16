@@ -11,10 +11,8 @@ def step_unsafe(system, string):
     # Constant symbols are mapped to a string containing themself
     # Variable symbols are mapped according to the replacement rules of the L-system
     # Joins all resulting strings into a single string of symbols, and returns it
-    # DISCUSS too dense? maybe should be done in several steps
-    # Making it less dense will (surprisingly) not have a significant performance impact
-    # See branch less-dense-step
-    return "".join(map(lambda s: str(s) if s in consts else dict[s], string))
+    replaced = map(lambda s: str(s) if s in consts else dict[s], string)
+    return "".join(replaced)
 
 # Iterates an L-system once.
 # Inputs: a tuple representing the L-system; a string of (possibly invalid) symbols.
