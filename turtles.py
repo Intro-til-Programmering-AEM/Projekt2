@@ -53,15 +53,14 @@ def turtlePlot(turtleCommands):
         dvalues[i] = np.dot(np.array([[ m.cos(angles[i]), -m.sin(angles[i])],
                [m.sin(angles[i]), m.cos(angles[i])]]),dvalues[i-1])
         xvalues[i] = xvalues[i-1]+steps[i]*dvalues[i]
-    print(xvalues)
     #Unpacks vector of datasets
     plt.plot(*zip(*xvalues)) # Plot line graph of x and y
     #Plottols
-    plt.title("Din mor") #TODO
+    plt.title("Your plot of choice") # TODO optionally include name of system
     # Set the title of the graph
-    plt.xlabel("x-values") # Set the x-axis label
-    plt.ylabel("y-values") # Set the y-axis label
-    plt.xlim([-4, 4]) # Set the limits of the x-axis
-    plt.ylim([-3, 3]) # Set the limits of the y-axis
-    plt.grid()
+    #plt.xlabel("x-values") # Set the x-axis label
+    #plt.ylabel("y-values") # Set the y-axis label
+    plt.xlim(0, 1) # Set the limits of the x-axis
+    plt.ylim(ymin = 0) # Set the limits of the y-axis
+    #plt.grid()
     plt.show()
