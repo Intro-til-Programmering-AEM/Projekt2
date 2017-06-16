@@ -30,8 +30,9 @@ def turtleGraph(string):
             angle = rightTurn
         else:
             angle = 0
-        pairs.append((line_length, angle))
-    return [item for pair in pairs for item in pair]
+        pairs.append(line_length)
+        pairs.append(angle)
+    return pairs
 
 def turtlePlot(turtleCommands):
     x=np.array([0,0])
