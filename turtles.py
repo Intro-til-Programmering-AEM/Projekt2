@@ -29,7 +29,10 @@ def turtleGraph(string, customSystem = None):
     consts, _, rules, segment_symbols = system
     variables = list(rules.keys())
     num_vars = sum(string.count(v) for v in variables)
-    i = m.log(num_vars, vars_factor)
+    if vars_factor == 1:
+        i = 1
+    else:
+        i = m.log(num_vars, vars_factor)
     scale = scale_factor**i
     pairs = []
     for c in string:
