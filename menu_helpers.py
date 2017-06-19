@@ -2,7 +2,7 @@
 
 main_options = ["Choose the type of Lindenmayer system and the number of iterations", "Generate plots", "Quit"]
 system_options = ["Kochs curve", "Sierpinski triangle"]
-warn_options= ["yes", "No"]
+warn_options= ["Yes", "No"]
 
 
 # Denne funktion tager et brugerinput (options) og sender det videre, hvis det er valid.
