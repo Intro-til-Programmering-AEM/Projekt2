@@ -14,7 +14,7 @@ while True:
         if option == 1:
             print("Which system would you like to see?")
             system_choice = menu(system_options)
-            if System is not None:
+            if system_choice is not None:
                 System = list(names.keys())[system_choice-1]
             print("Please choose the desired number of iterations:")
             n_choice = input_nonNeg_int("N = ")
