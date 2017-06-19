@@ -1,6 +1,7 @@
 from menu_helpers import *
 from systems import *
 from turtles import *
+from warning import *
 import sys
 
 System = None
@@ -17,9 +18,19 @@ while True:
             if system_choice is not None:
                 System = list(names.keys())[system_choice-1]
             print("Please choose the desired number of iterations:")
-            n_choice = input_nonNeg_int("N = ")
-            if n_choice is not None:
-                N = n_choice
+            while True:
+                n_choice = input_nonNeg_int("N = ")
+                if n_choice is not None:
+                    N = n_choice
+                    if shouldWarn==True:
+                        print("N is very high! Are you sure you want to continue with this number of iterations?")
+                        warn_choice=menu(warn_options)
+                        if warn_choice==1:
+                            break
+                        else:
+                            print("Good luck with that!")
+                    else:
+                        break
         elif option == 2:
             if System is not None and N is not None:
                 turtlePlot(turtleGraph(LindIter(System, N)))
