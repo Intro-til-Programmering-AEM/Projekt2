@@ -10,7 +10,8 @@ def shouldWarn(system,N):
 
 # A function that returns an estimate of maximum
 def max_vars(system):
-    variables, constants, rules, initialString = system
+    constants, initialString, rules, _ = system
+    variables = list(rules.keys())
     # Make a list of occurences of variables produced by each variable when taking one step
     num_vars = [sum(string.count(v) for v in variables) for string in rules.values()]
     return max(num_vars)
