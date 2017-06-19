@@ -9,8 +9,8 @@ def turtleGraph(string, customSystem = None):
     # Is the string from the L-system for a Sierpinski triangle?
     if customSystem is not None:
         system = customSystem
-        leftTurn = (1/8)*m.pi
-        rightTurn = (1/8)*m.pi
+        leftTurn = (1/4)*m.pi
+        rightTurn = (-1/4)*m.pi
         scale_factor = 1
         vars_factor = max_vars(system)
     elif 'A' in string:
