@@ -6,7 +6,10 @@ import math as m
 def shouldWarn(system,N):
     # The largest value the program advises the user to compute
     threshold = 7000
-    return N > m.log(threshold,max_vars(system)) #For bad computer
+    bound = max_vars(system)
+    if bound == 1:
+        return False
+    return N > m.log(threshold,bound) #For bad computer
 
 # A function that returns an estimate of maximum
 def max_vars(system):

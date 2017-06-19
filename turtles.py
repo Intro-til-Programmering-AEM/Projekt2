@@ -2,6 +2,8 @@ import numpy as np
 import math as m
 import matplotlib.pyplot as plt
 import systems
+from warning import max_vars
+
 
 def turtleGraph(string, customSystem = None):
     # Is the string from the L-system for a Sierpinski triangle?
