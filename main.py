@@ -3,6 +3,8 @@ from systems import *
 from turtles import *
 from warning import *
 import sys
+import matplotlib.image as img
+import matplotlib.pyplot as plt
 
 System = None
 N = None
@@ -25,6 +27,8 @@ while True:
                     N = n_choice
                     if shouldWarn(system,N)==True:
                         print("N is very high! Are you sure you want to continue with this number of iterations?")
+                        plt.imshow(img.imread('meme.jpg'))
+                        plt.show()
                         warn_choice=menu(warn_options)
                         if warn_choice==1:
                             print("Good luck with that!")
