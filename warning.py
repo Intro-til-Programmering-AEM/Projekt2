@@ -13,7 +13,8 @@ def shouldWarn(system,N):
 # for a given system
 def max_vars(system):
     # Unpack the system for easy access to each tuple
-    variables, constants, rules, initialString = system
+    constants, initialString, rules, _ = system
+    variables = list(rules.keys())
     # Make a list of occurences of variables produced by each variable when taking one step
     num_vars = [sum(string.count(v) for v in variables) for string in rules.values()]
     # the highest number of occurences is returned
