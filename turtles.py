@@ -48,7 +48,7 @@ def turtleGraph(string, customSystem = None):
         pairs.append(angle)
     return pairs
 
-def turtlePlot(turtleCommands):
+def turtlePlot(turtleCommands, name=None):
     # Takes every second value starting from the second
     angles=turtleCommands[1::2]
     # Extra value inserted due to range in for loop

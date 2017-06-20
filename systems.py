@@ -22,8 +22,8 @@ sierpinski_dict = {
 sierpinski = (['L','R'], "A", sierpinski_dict, ['A', 'B'])
 
 names = {
-    "koch": koch,
-    "sierpinski": sierpinski
+    "Koch": koch,
+    "Sierpinski": sierpinski
 }
 
 # Iterates an L-system N times from the initial string
