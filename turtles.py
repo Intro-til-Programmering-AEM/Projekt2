@@ -28,7 +28,7 @@ def turtleGraph(string, customSystem = None):
         vars_factor = 3
     # If none of the above, it's from the Koch curve
     else:
-        system = systems.KOCH
+        system = systems.koch
         # The turns for Koch are set to 30 degrees left and 30 degrees right
         leftTurn = (1/3)*m.pi
         rightTurn = (-2/3)*m.pi
@@ -69,7 +69,6 @@ def turtleGraph(string, customSystem = None):
     return pairs
 
 def turtlePlot(turtleCommands, name=None):
-    print(turtleCommands)
     # Takes every second value starting from the second
     angles=turtleCommands[1::2]
     # Extra value inserted due to range in for loop
