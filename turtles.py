@@ -50,7 +50,6 @@ def turtleGraph(string, customSystem = None):
 
 def turtlePlot(turtleCommands):
     print(turtleCommands)
-    x=np.array([0,0])
     # Takes every second value starting from the second
     angles=turtleCommands[1::2]
     # Extra value inserted due to range in for loop

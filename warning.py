@@ -5,7 +5,7 @@ import math as m
 # exceeding some predefined threshold
 def shouldWarn(system,N):
     # The largest value the program advises the user to compute
-    threshold = 7000
+    threshold = 2**16
     bound = max_vars(system)
     if bound == 1:
         return False

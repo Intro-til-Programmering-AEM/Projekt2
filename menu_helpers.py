@@ -1,8 +1,10 @@
 #Menu haandtering projekt 2
 
-main_options = ["Choose your Lindenmayer system", "Set the number of iterations", "Generate plots", "Quit"]
-system_options = ["Koch's curve", "Sierpinski's triangle"]
-warn_options= ["Yes", "No"]
+def menu(options):
+    # Print options with option numbers
+    for i in range(len(options)):
+        print(str(i+1)+". "+options[i]+".")
+    return input_option(options)
 
 # Denne funktion tager et brugerinput (options) og sender det videre, hvis det er valid.
 # Hvis ikke så kommer der en fejlmeddelelse
@@ -25,11 +27,7 @@ def input_option(options):
             print("Please input a number corresponding to the option you want to select.")
             pass
 
-def menu(options):
-    # Print options with option numbers
-    for i in range(len(options)):
-        print(str(i+1)+". "+options[i]+".")
-    return input_option(options)
+
 
 # Denne funktion ser om der er et input fra brugeren og laver en EOFError, hvis input er tomt.
 # Den returnerer en string
