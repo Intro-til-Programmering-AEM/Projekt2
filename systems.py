@@ -10,27 +10,27 @@ def LindIter(System, N):
     system = names[System]
     return iterate(system, N)
 
-koch_dict = {
+KOCH_DICT = {
     'S': "SLSRSLS",
 }
-koch = (['L','R'], "S", koch_dict, ['S'])
+KOCH = (['L','R'], "S", KOCH_DICT, ['S'])
 
-sierpinski_dict = {
+SIERPINKSI_DICT = {
     'A': "BRARB",
     'B': "ALBLA",
 }
-sierpinski = (['L','R'], "A", sierpinski_dict, ['A', 'B'])
+SIERPINKSI = (['L','R'], "A", SIERPINKSI_DICT, ['A', 'B'])
 
 names = {
-    "Koch": koch,
-    "Sierpinski": sierpinski
+    "KOCH": KOCH,
+    "SIERPINKSI": SIERPINKSI
 }
 
 # Iterates an L-system N times from the initial string
 # Inputs: a tuple `system` describing the L-system to be iterated;
 # a non-negative integer `N`, the number of iterations to be performed.
 # Output: a string of valid symbols.
-# Assumptions: `N` is a non-negative integer
+# Assumptions: `N` is a non-negative integers
 # (iterating 0 times returns the initial string)
 def iterate(system, N):
     # second tuple element is the initial string
@@ -48,12 +48,12 @@ def iterate(system, N):
 # Assumptions: `string` contains only legal symbols.
 def step_unsafe(system, string):
     # Unpacks needed parts of tuple
-    consts, _, dict, _ = system
+    consts, _, DICT, _ = system
     # Maps every symbol to a string
     # Constant symbols are mapped to a string containing themself
     # Variable symbols are mapped according to the replacement rules of the L-system
     # Joins all resulting strings into a single string of symbols, and returns it
-    replaced = map(lambda s: str(s) if s in consts else dict[s], string)
+    replaced = map(lambda s: str(s) if s in consts else DICT[s], string)
     return "".join(replaced)
 
 # Iterates an L-system once.

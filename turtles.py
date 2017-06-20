@@ -3,6 +3,7 @@ import math as m
 import matplotlib.pyplot as plt
 import systems
 from warning import max_vars
+from systems import names
 
 
 def turtleGraph(string, customSystem = None):
@@ -22,7 +23,7 @@ def turtleGraph(string, customSystem = None):
         vars_factor = 3
     # If not, it's from the Koch curve
     else:
-        system = systems.koch
+        system = systems.KOCH
         leftTurn = (1/3)*m.pi
         rightTurn = (-2/3)*m.pi
         scale_factor = 1/3
@@ -48,7 +49,7 @@ def turtleGraph(string, customSystem = None):
         pairs.append(angle)
     return pairs
 
-def turtlePlot(turtleCommands):
+def turtlePlot(turtleCommands, name=None):
     print(turtleCommands)
     # Takes every second value starting from the second
     angles=turtleCommands[1::2]
@@ -71,5 +72,8 @@ def turtlePlot(turtleCommands):
     # Unpacks vector of datasets
     plt.plot(*zip(*xvalues)) # Plot line graph of x and y
     # Plottols
-    plt.title("Your plot of choice") # TODO optionally include name of system
+    if name is not None:
+        plt.title(name) # TODO optionally include name of system
+    else:
+        plt.title("Your plot of choice:")
     plt.show()
