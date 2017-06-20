@@ -7,7 +7,6 @@ import matplotlib.image as img
 import matplotlib.pyplot as plt
 
 main_options = ["Choose your Lindenmayer system", "Set the number of iterations", "Generate plots", "Quit"]
-system_options = ["Koch's curve", "Sierpinski's triangle"]
 
 system = None
 N = None
@@ -24,10 +23,9 @@ while True:
             kind_choice = menu(["Predefined", "Custom"])
             if kind_choice == 1:
                 print("Which system would you like to see?")
-                system_choice = menu(system_options)
+                system_choice = menu(["Koch's curve", "Sierpinski's triangle"])
                 if system_choice is not None:
-                    System = list(names.keys())[system_choice-1]
-                    system = names[System]
+                    system = list(names.values())[system_choice-1]
                     custom = False
             else:
                 system = custom_system_menu()
