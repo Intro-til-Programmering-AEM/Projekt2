@@ -34,7 +34,6 @@ while True:
                 system = custom_system_menu()
                 if system is not None:
                     custom = True
-                    print(system)
         elif option == 2:
             print("Please choose the desired number of iterations:")
             while True:
