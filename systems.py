@@ -1,3 +1,45 @@
+# Iterates an L-system N times from the initial string
+# Inputs: a string `System` naming the L-system to be iterated;
+# a non-negative integer `N`, the number of iterations to be performed.
+# Output: a string of valid symbols.
+# Assumptions: `System` is a key of `names`,
+# `N` is a non-negative integer
+# (iterating 0 times returns the initial string)
+def LindIter(System, N):
+    # Look up tuple of system description based on input string
+    system = names[System]
+    return iterate(system, N)
+
+names = {
+    "Koch": koch,
+    "Sierpinski": sierpinski
+}
+
+koch = (['L','R'], "S", koch_dict, ['S'])
+koch_dict = {
+    'S': "SLSRSLS",
+}
+
+sierpinski = (['L','R'], "A", sierpinski_dict, ['A', 'B'])
+sierpinski_dict = {
+    'A': "BRARB",
+    'B': "ALBLA",
+}
+
+# Iterates an L-system N times from the initial string
+# Inputs: a tuple `system` describing the L-system to be iterated;
+# a non-negative integer `N`, the number of iterations to be performed.
+# Output: a string of valid symbols.
+# Assumptions: `N` is a non-negative integer
+# (iterating 0 times returns the initial string)
+def iterate(system, N):
+    # second tuple element is the initial string
+    string = system[1]
+    # Repeatedly iterate
+    for _ in range(N):
+        string = step_unsafe(system, string)
+    return string
+
 # Iterates an L-system once, without checking whether the symbols are legal.
 # Inputs: a tuple `system` (variable symbols, constant symbol, variable replacement rules, initial string),
 # which represents the the L-system;
@@ -27,47 +69,3 @@ def step(system, string):
     if not all(c in symbols for c in string):
         raise AssertionError("Lindenmayer string contains illegal symbols")
     return step_unsafe(system, string)
-
-koch_dict = {
-    'S': "SLSRSLS",
-}
-
-koch = (['L','R'], "S", koch_dict, ['S'])
-
-sierpinski_dict = {
-    'A': "BRARB",
-    'B': "ALBLA",
-}
-
-sierpinski = (['L','R'], "A", sierpinski_dict, ['A', 'B'])
-
-names = {
-    "Koch": koch,
-    "Sierpinski": sierpinski
-}
-
-# Iterates an L-system N times from the initial string
-# Inputs: a string `System` naming the L-system to be iterated;
-# a non-negative integer `N`, the number of iterations to be performed.
-# Output: a string of valid symbols.
-# Assumptions: `System` is a key of `names`,
-# `N` is a non-negative integer
-# (iterating 0 times returns the initial string)
-def LindIter(System, N):
-    # Look up tuple of system description based on input string
-    system = names[System]
-    return iterate(system, N)
-
-# Iterates an L-system N times from the initial string
-# Inputs: a tuple `system` describing the L-system to be iterated;
-# a non-negative integer `N`, the number of iterations to be performed.
-# Output: a string of valid symbols.
-# Assumptions: `N` is a non-negative integer
-# (iterating 0 times returns the initial string)
-def iterate(system, N):
-    # second tuple element is the initial string
-    string = system[1]
-    # Repeatedly iterate
-    for _ in range(N):
-        string = step_unsafe(system, string)
-    return string
