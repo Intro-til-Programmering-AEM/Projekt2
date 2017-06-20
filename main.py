@@ -36,8 +36,9 @@ while True:
             while True:
                 n_choice = input_nonNeg_int("N = ")
                 if n_choice is not None:
-                    print(n_choice)
                     N = n_choice
+                    print("N = %d" %N)
+                    print("system = %s" %list(names.keys())[system_choice-1])
                     # Warning message if N is too high
                     if shouldWarn(system,N)==True:
                         print("N is very high! Are you sure you want to continue with this number of iterations?")
