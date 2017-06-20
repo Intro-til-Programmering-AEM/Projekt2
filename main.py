@@ -6,6 +6,9 @@ import sys
 import matplotlib.image as img
 import matplotlib.pyplot as plt
 
+main_options = ["Choose your Lindenmayer system", "Set the number of iterations", "Generate plots", "Quit"]
+system_options = ["Koch's curve", "Sierpinski's triangle"]
+
 system = None
 N = None
 custom = False
@@ -44,7 +47,7 @@ while True:
                         plt.imshow(img.imread('meme.jpg'))
                         plt.show()
                         # yes/no menu
-                        warn_choice=menu(warn_options)
+                        warn_choice=menu(["Yes", "No"])
                         # Continiues anyway
                         if warn_choice==1:
                             print("Good luck with that!")

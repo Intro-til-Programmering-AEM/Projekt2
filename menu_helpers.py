@@ -1,9 +1,5 @@
 #Menu haandtering projekt 2
 
-main_options = ["Choose your Lindenmayer system", "Set the number of iterations", "Generate plots", "Quit"]
-system_options = ["Koch's curve", "Sierpinski's triangle"]
-warn_options= ["Yes", "No"]
-
 # Denne funktion tager et brugerinput (options) og sender det videre, hvis det er valid.
 # Hvis ikke så kommer der en fejlmeddelelse
 def input_option(options):
