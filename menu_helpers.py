@@ -6,6 +6,8 @@ def menu(options):
         print(str(i+1)+". "+options[i]+".")
     return input_option(options)
 
+# This function aks for a userinput until an input is given and returns it if the input is valid
+# If the input is not valid an errormessage is printet
 def input_option(options):
     while(True):
         try:
@@ -25,8 +27,8 @@ def input_option(options):
             print("Please input a number corresponding to the option you want to select.")
             pass
 
-# Denne funktion ser om der er et input fra brugeren og laver en EOFError, hvis input er tomt.
-# Den returnerer en string
+# This function checks for userinput and makes an EOFError if the input is empty
+# The function returns a string
 def input_wrapper(request):
     x = input(request)
     if x == "":
