@@ -80,7 +80,6 @@ def input_symbol_string(request, allow_lr = False):
         else:
             return x
 
-
 # Denne funktion tager et brugerinput (options) og sender det videre, hvis det er valid.
 # Hvis ikke så kommer der en fejlmeddelelse
 
@@ -106,9 +105,3 @@ def input_nonNeg_int(request):
         print("Please input a non-negative integer")
     except EOFError:
         return None
-
-
-
-
-
-
