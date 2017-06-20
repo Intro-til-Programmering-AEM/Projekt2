@@ -1,4 +1,4 @@
-from menu_helpers import menu, input_nonNeg_int, custom_system_menu, main_options, system_options, warn_options
+from menu_helpers import menu, input_nonNeg_int, custom_system_menu
 from systems import iterate, names
 from turtles import turtleGraph, turtlePlot
 from warning import shouldWarn

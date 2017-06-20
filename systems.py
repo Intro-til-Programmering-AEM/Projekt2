@@ -10,20 +10,20 @@ def LindIter(System, N):
     system = names[System]
     return iterate(system, N)
 
-names = {
-    "Koch": koch,
-    "Sierpinski": sierpinski
-}
-
-koch = (['L','R'], "S", koch_dict, ['S'])
 koch_dict = {
     'S': "SLSRSLS",
 }
+koch = (['L','R'], "S", koch_dict, ['S'])
 
-sierpinski = (['L','R'], "A", sierpinski_dict, ['A', 'B'])
 sierpinski_dict = {
     'A': "BRARB",
     'B': "ALBLA",
+}
+sierpinski = (['L','R'], "A", sierpinski_dict, ['A', 'B'])
+
+names = {
+    "Koch": koch,
+    "Sierpinski": sierpinski
 }
 
 # Iterates an L-system N times from the initial string
