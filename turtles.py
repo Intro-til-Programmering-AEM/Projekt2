@@ -23,7 +23,7 @@ def turtleGraph(string, customSystem = None):
         vars_factor = 3
     # If not, it's from the Koch curve
     else:
-        system = systems.KOCH
+        system = systems.koch
         leftTurn = (1/3)*m.pi
         rightTurn = (-2/3)*m.pi
         scale_factor = 1/3

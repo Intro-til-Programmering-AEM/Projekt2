@@ -6,7 +6,7 @@ import sys
 import matplotlib.image as img
 import matplotlib.pyplot as plt
 
-main_options = ["Choose your Lindenmayer system", "Set the number of iterations", "Generate plots", "Quit"]
+main_options = ["Choose your Lindenmayer system", "Generate plots", "Quit"]
 
 system = None
 N = None
@@ -23,7 +23,7 @@ while True:
             kind_choice = menu(["Predefined", "Custom"])
             if kind_choice == 1:
                 print("Which system would you like to see?")
-                system_choice = menu(["Koch's curve", "Sierpinski's triangle"])
+                system_choice = menu(["koch's curve", "Sierpinski's triangle"])
                 if system_choice is not None:
                     system = list(names.values())[system_choice-1]
                     custom = False
@@ -32,7 +32,6 @@ while True:
                 if system is not None:
                     custom = True
                     print(system)
-        elif option == 2:
             print("Please choose the desired number of iterations:")
             while True:
                 n_choice = input_nonNeg_int("N = ")
@@ -59,13 +58,13 @@ while True:
                     # Returns to main menu if enter is pressed
                 else:
                     break
-        elif option == 3:
+        elif option == 2:
             if system is not None and N is not None:
                 # Plots
                 turtlePlot(turtleGraph(iterate(system, N), system if custom else None))
             else:
                 print("Please choose your desired L-system and number of iterations first")
-        elif option == 4:
+        elif option == 3:
             print("Thank you for using the Lindenmayer system playground")
             # Exit properly
             sys.exit()
