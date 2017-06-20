@@ -71,4 +71,3 @@ while True:
             print("Thank you for using the Lindenmayer system playground")
             # Exit properly
             sys.exit()
-
