@@ -6,6 +6,7 @@ from warning import max_vars
 
 
 def turtleGraph(string, customSystem = None):
+    print(string)
     # Is the string from the L-system for a Sierpinski triangle?
     if customSystem is not None:
         system = customSystem
@@ -48,6 +49,7 @@ def turtleGraph(string, customSystem = None):
     return pairs
 
 def turtlePlot(turtleCommands):
+    print(turtleCommands)
     x=np.array([0,0])
     # Takes every second value starting from the second
     angles=turtleCommands[1::2]
@@ -74,7 +76,7 @@ def turtlePlot(turtleCommands):
     # Set the title of the graph
     #plt.xlabel("x-values") # Set the x-axis label
     #plt.ylabel("y-values") # Set the y-axis label
-    plt.xlim(0, 1) # Set the limits of the x-axis
-    plt.ylim(ymin = 0) # Set the limits of the y-axis
+    #plt.xlim(0, 1) # Set the limits of the x-axis
+    #plt.ylim(ymin = 0) # Set the limits of the y-axis
     #plt.grid()
     plt.show()
