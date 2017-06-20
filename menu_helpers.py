@@ -1,7 +1,11 @@
 #Menu haandtering projekt 2
 
-# Denne funktion tager et brugerinput (options) og sender det videre, hvis det er valid.
-# Hvis ikke så kommer der en fejlmeddelelse
+def menu(options):
+    # Print options with option numbers
+    for i in range(len(options)):
+        print(str(i+1)+". "+options[i]+".")
+    return input_option(options)
+
 def input_option(options):
     while(True):
         try:
@@ -21,12 +25,6 @@ def input_option(options):
             print("Please input a number corresponding to the option you want to select.")
             pass
 
-def menu(options):
-    # Print options with option numbers
-    for i in range(len(options)):
-        print(str(i+1)+". "+options[i]+".")
-    return input_option(options)
-
 # Denne funktion ser om der er et input fra brugeren og laver en EOFError, hvis input er tomt.
 # Den returnerer en string
 def input_wrapper(request):
@@ -34,44 +32,6 @@ def input_wrapper(request):
     if x == "":
         raise EOFError
     return x
-
-def input_nonNeg_int(request):
-    try:
-        x = int(input_wrapper(request))
-        if x >= 0:
-            return x
-        else:
-            raise ValueError
-    except ValueError:
-        print("Please input a non-negative integer")
-    except EOFError:
-        return None
-
-def input_symbol_string(request, allow_lr = False):
-    while True:
-        try:
-            x = input_wrapper("Please input a string "+request+": ")
-        except EOFError:
-            return None
-        if x is None:
-            return None
-        if x == " ":
-            x = ""
-        if any(c in x for c in "LR") and not allow_lr:
-            print("String cannot contain L or R as these have predefined meaning, please try again.")
-        else:
-            return x
-
-def input_legal_string(request, test, error = "String must only contain legal symbols."):
-    allow_lr = all(test(x) for x in "LR")
-    while True:
-        x = input_symbol_string(request, allow_lr)
-        if x is None:
-            return None
-        elif not all(test(c) for c in x):
-            print(error)
-        else:
-            return x
 
 def custom_system_menu():
     print("First you will define your constants and variables.")
@@ -104,3 +64,44 @@ def custom_system_menu():
             return None
         rules.append((c, rule_string))
     return ([c for c in constant_string+"LR"], initial_string, dict(rules), [c for c in line_string])
+
+def input_symbol_string(request, allow_lr = False):
+    while True:
+        try:
+            x = input_wrapper("Please input a string "+request+": ")
+        except EOFError:
+            return None
+        if x is None:
+            return None
+        if x == " ":
+            x = ""
+        if any(c in x for c in "LR") and not allow_lr:
+            print("String cannot contain L or R as these have predefined meaning, please try again.")
+        else:
+            return x
+
+# Denne funktion tager et brugerinput (options) og sender det videre, hvis det er valid.
+# Hvis ikke så kommer der en fejlmeddelelse
+
+def input_legal_string(request, test, error = "String must only contain legal symbols."):
+    allow_lr = all(test(x) for x in "LR")
+    while True:
+        x = input_symbol_string(request, allow_lr)
+        if x is None:
+            return None
+        elif not all(test(c) for c in x):
+            print(error)
+        else:
+            return x
+
+def input_nonNeg_int(request):
+    try:
+        x = int(input_wrapper(request))
+        if x >= 0:
+            return x
+        else:
+            raise ValueError
+    except ValueError:
+        print("Please input a non-negative integer")
+    except EOFError:
+        return None
