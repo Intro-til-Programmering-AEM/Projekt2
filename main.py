@@ -36,6 +36,7 @@ while True:
             while True:
                 n_choice = input_nonNeg_int("N = ")
                 if n_choice is not None:
+                    print(n_choice)
                     N = n_choice
                     # Warning message if N is too high
                     if shouldWarn(system,N)==True:
