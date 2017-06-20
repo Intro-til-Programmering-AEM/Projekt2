@@ -1,10 +1,13 @@
+import sys
+
+import matplotlib.image as img
+import matplotlib.pyplot as plt
+
 from menu_helpers import menu, input_nonNeg_int, custom_system_menu
 from systems import iterate, names
 from turtles import turtleGraph, turtlePlot
 from warning import shouldWarn
-import sys
-import matplotlib.image as img
-import matplotlib.pyplot as plt
+
 
 main_options = ["Choose your Lindenmayer system", "Generate plots", "Quit"]
 
@@ -31,7 +34,6 @@ while True:
                 system = custom_system_menu()
                 if system is not None:
                     custom = True
-                    print(system)
             print("Please choose the desired number of iterations:")
             while True:
                 n_choice = input_nonNeg_int("N = ")
