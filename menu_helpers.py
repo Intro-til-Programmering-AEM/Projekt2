@@ -86,7 +86,7 @@ Please note that the same symbol cannot be assigned as both a variable and a con
     # Create an empty list to be filled out with replacements for the variables
     rules = []
     # The replacements must be constants, variables or predefined constants
-    for c in variable_string:
+    for c in variables:
         print("""Please choose wich symbols you want to replace your constants with.
 
               We encourage you to replace your variable with more than one symbol and include L and R if you want the curve to bent""")
