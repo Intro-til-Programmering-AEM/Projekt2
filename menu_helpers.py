@@ -8,6 +8,19 @@ def menu(options):
                                  lambda x: x > 0 and x <= len(options),
                                  "Please input a number corresponding to the option you want to select.")
 
+def input_int_constrained(request, test, error):
+    while True:
+        try:
+            x = int(input_wrapper(request))
+            if test(x):
+                return x
+            else:
+                raise ValueError
+        except ValueError:
+            print(error)
+        except EOFError:
+            return None
+
 # This function checks for userinput and makes an EOFError if the input is empty
 # The function returns a string
 def input_wrapper(request):
@@ -111,18 +124,5 @@ def input_legal_string(request, test, error = "String must only contain legal sy
         # Return x if none of the above problems were encountered
         else:
             return x
-
-def input_int_constrained(request, test, error):
-    while True:
-        try:
-            x = int(input_wrapper(request))
-            if test(x):
-                return x
-            else:
-                raise ValueError
-        except ValueError:
-            print(error)
-        except EOFError:
-            return None
 
 
