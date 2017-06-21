@@ -113,14 +113,16 @@ def input_legal_string(request, test, error = "String must only contain legal sy
             return x
 
 def input_int_constrained(request, test, error):
-    try:
-        x = int(input_wrapper(request))
-        if x >= 0:
-            return x
-        else:
-            raise ValueError
-    except ValueError:
-        print("Please input a non-negative integer")
-    except EOFError:
-        return None
+    while True:
+        try:
+            x = int(input_wrapper(request))
+            if test(x):
+                return x
+            else:
+                raise ValueError
+        except ValueError:
+            print("Please input a non-negative integer")
+        except EOFError:
+            return None
+
 
