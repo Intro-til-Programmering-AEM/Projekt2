@@ -47,7 +47,7 @@ while True:
             # Opens custom menu
             elif kind_choice==2:
                 # Opens the custom menu
-                system = custom_system_menu()
+                system = define_custom_system()
                 if system is not None:
                     # Now a custom system has been chosen
                     custom = True
