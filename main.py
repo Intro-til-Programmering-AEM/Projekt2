@@ -17,6 +17,7 @@ custom = False
 print("Welcome to the Lindenmayer system playground! :D\n")
 # Shows image
 plt.imshow(img.imread('drage.jpg'))
+plt.axis('off')
 plt.show()
 while True:
     # Main menu option 1 - System
