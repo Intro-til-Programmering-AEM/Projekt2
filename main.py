@@ -3,7 +3,7 @@ import sys
 import matplotlib.image as img
 import matplotlib.pyplot as plt
 
-from menu_helpers import menu, input_int_constrained, custom_system_menu
+from menu_helpers import menu, input_int_constrained, define_custom_system
 from systems import iterate, names
 from turtles import turtleGraph, turtlePlot
 from warning import shouldWarn
