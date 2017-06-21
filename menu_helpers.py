@@ -38,38 +38,50 @@ def input_wrapper(request):
 # Queries for user input to build a custom L-system.
 # Will return None if cancelled, which can happen at any time during the process.
 def custom_system_menu():
-    print("""First you will define your constants and variables.
-There are two constants you will be not able to define yourself: L and R.
-You will always have those two available, and they will each represent a turn by 45°.
-Then you will choose which symbols will eventually represent a line segment.
-Then, the initial string for your system.
-Finally, you will choose the replacement rules for each variable.
-Cancelling at any point will return you to the main menu.
-Since an empty input is used to cancel, use a single space to indicate an empty string.
-All characters in your strings will be counted, so if you include e.g. a comma or a space, it will be counted as a symbol.
-Each character will be counted only once.""")
+    print("""
+Please note the following:
+    1) Cancelling at any point will return you to the main menu.
+    2) Since an empty input is used to cancel, use a single space to indicate an empty string.
+    3) All characters in your strings will be counted, so if you include e.g. a comma or a space, it will be counted as a symbol.
+    4) Each character will be counted only once.
+
+
+First you will be able to define your constants.
+Please note:
+    1) There are two constants you will be not able to define yourself: L and R.
+    2) You will always have those two constants available, and they will each represent a turn by 45°.
+    3) The same symbol cannot be assigned as both a variable and a constant!
+    """)
     predefined = ['L', 'R']
     constant_string = input_legal_string("containing all your constants", lambda c: c not in predefined)
     if constant_string is None:
         return None
     else:
         constants = list(set(constant_string))
+    print("""You must now define your variables.
+
+Please note that the same symbol cannot be assigned as both a variable and a constant!""")
     variable_string = input_legal_string("containing all your variables", lambda c: c not in constants+predefined, "Symbols cannot be both constants and variables.")
     if variable_string is None:
         return None
     else:
         variables = list(set(variable_string))
     symbols = constants+variables
+    print("Please choose which constants and variables that should represent linesegments")
     line_string = input_legal_string("containing all the symbols that should represent line segments", lambda c: c in symbols)
     if line_string is None:
         return None
     else:
         line_symbols = list(set(line_string))
+    print("Please choose the initial symbol. This symbol must also be chosen from the constants and variables")
     initial_string = input_legal_string("that your system will be iterated from", lambda c: c in symbols+predefined)
     if initial_string is None:
         return None
     rules = []
     for c in variable_string:
+        print("""Please choose wich symbols you want to replace your constants with.
+
+              We encourage you to replace your variable with more than one symbol and include L and R if you want the curve to bent""")
         rule_string = input_legal_string("which "+str(c)+" should be replaced with", lambda c: c in symbols+predefined)
         if rule_string is None:
             return None
