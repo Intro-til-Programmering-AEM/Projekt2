@@ -87,3 +87,17 @@ def step(system, string):
     if not all(c in symbols for c in string):
         raise AssertionError("Lindenmayer string contains illegal symbols")
     return step_unsafe(system, string)
+
+# A function that returns the maximum number of variables a single variable can produce
+# for a given system
+def max_vars(system):
+    # Unpack the system for easy access to each tuple
+    constants, initialString, rules, _ = system
+    variables = list(rules.keys())
+    # Make a list of occurences of variables produced by each variable when taking one step
+    num_vars = [sum(string.count(v) for v in variables) for string in rules.values()]
+    # the highest number of occurences is returned if there are any
+    if num_vars:
+        return max(num_vars)
+    else:
+        return 0

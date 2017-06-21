@@ -2,8 +2,7 @@ import numpy as np
 import math as m
 import matplotlib.pyplot as plt
 import systems
-from warning import max_vars
-from systems import names
+from systems import names, max_vars
 
 
 def turtleGraph(string, customSystem = None):
