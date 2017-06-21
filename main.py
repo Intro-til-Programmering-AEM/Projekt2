@@ -3,7 +3,7 @@ import sys
 import matplotlib.image as img
 import matplotlib.pyplot as plt
 
-from menu_helpers import menu, input_nonNeg_int, custom_system_menu
+from menu_helpers import menu, input_int_constrained, custom_system_menu
 from systems import iterate, names
 from turtles import turtleGraph, turtlePlot
 from warning import shouldWarn
@@ -47,7 +47,7 @@ while True:
             if system is None:
                 print("Please note: You are currently trying to select the number of iterations before chosing the system. This means that the program cannot warn you if the system will take too long to iterate")
             while True:
-                n_choice = input_nonNeg_int("N = ")
+                n_choice = input_int_constrained("N = ", lambda x: x >= 0, "Please input a non-negative integer")
                 if n_choice is not None:
                     N = n_choice
                     #print("system = %s" %list(names.keys())[system_choice-1])

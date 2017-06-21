@@ -4,28 +4,9 @@ def menu(options):
     # Print options with option numbers
     for i in range(len(options)):
         print(str(i+1)+". "+options[i]+".")
-    return input_option(options)
-
-# This function aks for a userinput until an input is given and returns it if the input is valid
-# If the input is not valid an errormessage is printet
-def input_option(options):
-    while(True):
-        try:
-            # Get number that may be a legal option
-            x = int(input_wrapper("Select an option: "))
-            # Check if it's legal
-            if x <= len(options) and x > 0:
-                return x
-            # if the options is not legal, an appropriate message is printed
-            else:
-                print("Not an option, please try again.")
-        # if no option is selected, return None
-        except EOFError:
-            return None
-        # if a wrong type of options is selected, pass and repeat while-statement
-        except ValueError:
-            print("Please input a number corresponding to the option you want to select.")
-            pass
+    return input_int_constrained("Select an option: ",
+                                 lambda x: x > 0 and x <= len(options),
+                                 "Please input a number corresponding to the option you want to select.")
 
 # This function checks for userinput and makes an EOFError if the input is empty
 # The function returns a string
