@@ -1,7 +1,7 @@
 import math as m
 from systems import max_vars
 
-# A function that returns True if the length of the string is at risk of
+# Returns True if the length of the string is at risk of
 # exceeding a predefined, empirically determined threshold
 # (roughly as long as we were willing to wait for our slowest computer to run)
 def shouldWarn(system,N):
