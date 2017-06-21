@@ -36,14 +36,20 @@ while True:
             if kind_choice == 1:
                 print("Which system would you like to see?")
                 system_choice = menu(["Koch's curve", "Sierpinski's triangle"])
+                # Only redefine global variables if a system was chosen
                 if system_choice is not None:
+                    # Indices are 0-based but menus are 1-based,
+                    # so subtract 1 from the system_choice
                     system = list(names.values())[system_choice-1]
                     name=list(names.keys())[system_choice-1]
+                    # No custom system has been chosen
                     custom = False
             # Opens custom menu
             elif kind_choice==2:
+                # Opens the custom menu
                 system = custom_system_menu()
                 if system is not None:
+                    # Now a custom system has been chosen
                     custom = True
                     name = "Custom"
             # Passes to main menu
