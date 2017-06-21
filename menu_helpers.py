@@ -101,7 +101,7 @@ Please choose the strings that you want to replace each variable with.
 We encourage you to create rules with more than one symbol
 and include L and R if you want the curve to bend.
 """)
-    for c in variable:
+    for c in variables:
         rule_string = input_legal_string("which "+str(c)+" should be replaced with", lambda c: c in symbols+predefined)
         if rule_string is None:
             return None
