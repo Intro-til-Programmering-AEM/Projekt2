@@ -17,6 +17,8 @@ custom = False
 print("Welcome to the Lindenmayer system playground! :D")
 while True:
     # Main menu
+    if N is not None and system is not None:
+        print("The system "+name+" will be run for "+str(N)+" iterations")
     print("Your options:")
     option = menu(main_options)
     # Empty input restarts menu
@@ -26,14 +28,16 @@ while True:
             kind_choice = menu(["Predefined", "Custom"])
             if kind_choice == 1:
                 print("Which system would you like to see?")
-                system_choice = menu(["koch's curve", "Sierpinski's triangle"])
+                system_choice = menu(["Koch's curve", "Sierpinski's triangle"])
                 if system_choice is not None:
                     system = list(names.values())[system_choice-1]
+                    name=list(names.keys())[system_choice-1]
                     custom = False
             else:
                 system = custom_system_menu()
                 if system is not None:
                     custom = True
+                    name = "Custom"
             print("Please choose the desired number of iterations:")
             while True:
                 n_choice = input_nonNeg_int("N = ")
@@ -65,7 +69,7 @@ while True:
         elif option == 2:
             if system is not None and N is not None:
                 # Plots
-                turtlePlot(turtleGraph(iterate(system, N), system if custom else None))
+                turtlePlot(turtleGraph(iterate(system, N), system if custom else None),name)
             else:
                 print("Please choose your desired L-system and number of iterations first")
         elif option == 3:
