@@ -48,12 +48,12 @@ while True:
             # Passes to main menu
             else:
                 pass
-            print("Please choose the desired number of iterations:")
         # Main menu option 2 - Iterations
         elif option==2:
             if system is None:
                 # Warning
                 print("Please note: You are currently trying to select the number of iterations before chosing the system. This means that the program cannot warn you if the system will take too long to iterate")
+            print("Please choose the desired number of iterations:")
             while True:
                 n_choice = input_int_constrained("N = ", lambda x: x >= 0, "Please input a non-negative integer")
                 if n_choice is not None:
