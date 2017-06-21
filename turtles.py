@@ -90,7 +90,7 @@ def turtlePlot(turtleCommands, name=None):
     plt.plot(*zip(*xvalues)) # Plot line graph of x and y
     # Plottols
     if name is not None:
-        plt.title(name) # TODO optionally include name of system
+        plt.title(name)
     else:
         plt.title("Your plot of choice:")
     plt.show()

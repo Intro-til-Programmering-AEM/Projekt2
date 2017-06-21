@@ -1,5 +1,9 @@
 #Menu haandtering projekt 2
 
+# Creates a menu
+# Takes a userinput
+# Returns the selected option
+# Asks for input again if it does not correspont with a menu option
 def menu(options):
     # Print options with option numbers
     for i in range(len(options)):
@@ -7,6 +11,7 @@ def menu(options):
     return input_int_constrained("Select an option: ",
                                  lambda x: x > 0 and x <= len(options),
                                  "Please input a number corresponding to the option you want to select.")
+
 
 def input_int_constrained(request, test, error):
     while True:
