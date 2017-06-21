@@ -10,17 +10,21 @@ from warning import shouldWarn
 
 
 main_options = ["Choose your Lindenmayer system", "Number of iterations", "Generate plots", "Quit"]
+system_options = (["Koch's curve", "Sierpinski's triangle"])
+
+
+print("Welcome to the Lindenmayer system playground! :D\n")
+# Shows "splash screen" image of example fractal
+# that can be generated using the program
+plt.imshow(img.imread('drage.jpg'))
+plt.axis('off')
+plt.show()
 
 system = None
 N = None
 custom = False
-print("Welcome to the Lindenmayer system playground! :D\n")
-# Shows image
-plt.imshow(img.imread('drage.jpg'))
-plt.axis('off')
-plt.show()
+
 while True:
-    # Main menu option 1 - System
     if system is not None:
         print("You have chosen the system "+str(name)+"\n")
     if N is not None:
@@ -29,68 +33,70 @@ while True:
     option = menu(main_options)
     # Empty input restarts menu
     if option is not None:
+        # Main menu - System
         if option == 1:
             print("What kind of system would you like to use?")
             kind_choice = menu(["Predefined", "Custom"])
-            # Opens predefined menu
+            # System menu - Predefined
             if kind_choice == 1:
                 print("Which system would you like to see?")
-                system_choice = menu(["Koch's curve", "Sierpinski's triangle"])
+                system_choice = menu(system_options)
                 # Only redefine global variables if a system was chosen
                 if system_choice is not None:
                     # Indices are 0-based but menus are 1-based,
                     # so subtract 1 from the system_choice
                     system = list(names.values())[system_choice-1]
-                    name=list(names.keys())[system_choice-1]
-                    # No custom system has been chosen
+                    # Get the nice name from the choices the user saw
+                    name = system_options[system_choice-1]
+                    # A predefined system is in use
                     custom = False
-            # Opens custom menu
+            # System menu - Custom
             elif kind_choice==2:
-                # Opens the custom menu
-                system = define_custom_system()
-                if system is not None:
-                    # Now a custom system has been chosen
+                # Walks user through defining a custom system
+                new_system = define_custom_system()
+                # If cancelled, the original system is kept as is
+                if new_system is not None:
+                    system = new_system
                     custom = True
-                    name = "Custom"
-            # Passes to main menu
+                    name = "A custom L-system"
+            # Only other option is None, pass to the main menu
             else:
                 pass
-        # Main menu option 2 - Iterations
+        # Main menu - Iterations
         elif option==2:
             if system is None:
-                # Warning
                 print("Please note: You are currently trying to select the number of iterations before chosing the system. This means that the program cannot warn you if the system will take too long to iterate")
             print("Please choose the desired number of iterations:")
             while True:
                 n_choice = input_int_constrained("N = ", lambda x: x >= 0, "Please input a non-negative integer")
                 if n_choice is not None:
                     N = n_choice
-                    # Warning message if N is too high
                     if system is not None and shouldWarn(system,N):
                         print("N is very high! Are you sure you want to continue with this number of iterations?")
-                        # yes/no menu
                         warn_choice=menu(["Yes", "No"])
-                        # Continiues anyway
+                        # First choice is Yes
                         if warn_choice==1:
                             print("Good luck with that!")
                             break
-                        # New number of iterations
+                        # Otherwise, give them a new chance to choose N
                         else:
                             print("Please choose another N-value")
                     # Returns to main menu if enter is pressed
                     else:
                         break
-                    # Returns to main menu if enter is pressed
+                # Returns to main menu if enter is pressed
                 else:
                     break
-        #Main menu option 3 - Plotting
+        #Main menu - Plotting
         elif option == 3:
+            # Can only plot if it is known which system to iterate and for how long
             if system is not None and N is not None:
-                # Plots
-                turtlePlot(turtleGraph(iterate(system, N), system if custom else None),name)
+                # turtleGraph can work with custom systems using an optional argument,
+                # so passing None is the same as not passing said argument
+                turtlePlot(turtleGraph(iterate(system, N), system if custom else None), name)
             else:
-                print("Please choose both your desired L-system and number of iterations first")
-        #Main menu option 4 - Exit
+                print("Please choose both your desired L-system and number of iterations first.")
+        #Main menu - Exit
         elif option == 4:
             print("Thank you for using the Lindenmayer system playground")
             # Exit properly
