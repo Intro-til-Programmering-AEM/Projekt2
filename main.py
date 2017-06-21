@@ -9,16 +9,18 @@ from turtles import turtleGraph, turtlePlot
 from warning import shouldWarn
 
 
-main_options = ["Choose your Lindenmayer system", "Generate plots", "Quit"]
+main_options = ["Choose your Lindenmayer system", "Number of iterations", "Generate plots", "Quit"]
 
 system = None
 N = None
 custom = False
-print("Welcome to the Lindenmayer system playground! :D")
+print("Welcome to the Lindenmayer system playground! :D\n")
 while True:
     # Main menu
-    if N is not None and system is not None:
-        print("The system "+name+" will be run for "+str(N)+" iterations")
+    if system is not None:
+        print("You have chosen the system "+str(name)+"\n")
+    if N is not None:
+        print("The system will be run for "+str(N)+" iterations\n")
     print("Your options:")
     option = menu(main_options)
     # Empty input restarts menu
@@ -33,20 +35,24 @@ while True:
                     system = list(names.values())[system_choice-1]
                     name=list(names.keys())[system_choice-1]
                     custom = False
-            else:
+            elif kind_choice==2:
                 system = custom_system_menu()
                 if system is not None:
                     custom = True
                     name = "Custom"
+            else:
+                pass
             print("Please choose the desired number of iterations:")
+        elif option==2:
+            if system is None:
+                print("Please note: You are currently trying to select the number of iterations before chosing the system. This means that the program cannot warn you if the system will take too long to iterate")
             while True:
                 n_choice = input_nonNeg_int("N = ")
                 if n_choice is not None:
                     N = n_choice
-                    print("N = %d" %N)
-                    print("system = %s" %list(names.keys())[system_choice-1])
+                    #print("system = %s" %list(names.keys())[system_choice-1])
                     # Warning message if N is too high
-                    if shouldWarn(system,N)==True:
+                    if system is not None and shouldWarn(system,N):
                         print("N is very high! Are you sure you want to continue with this number of iterations?")
                         # Shows funny image
                         plt.imshow(img.imread('meme.jpg'))
@@ -66,13 +72,13 @@ while True:
                     # Returns to main menu if enter is pressed
                 else:
                     break
-        elif option == 2:
+        elif option == 3:
             if system is not None and N is not None:
                 # Plots
                 turtlePlot(turtleGraph(iterate(system, N), system if custom else None),name)
             else:
                 print("Please choose your desired L-system and number of iterations first")
-        elif option == 3:
+        elif option == 4:
             print("Thank you for using the Lindenmayer system playground")
             # Exit properly
             sys.exit()

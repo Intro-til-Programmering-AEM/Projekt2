@@ -7,7 +7,6 @@ from systems import names
 
 
 def turtleGraph(string, customSystem = None):
-    print(string)
     # Is the string from the L-system for a Sierpinski triangle?
     # If there is input in customSystem, assign parameters accordingly
     if customSystem is not None:
@@ -38,7 +37,7 @@ def turtleGraph(string, customSystem = None):
         vars_factor = 4
     # Unpack the system into appropriate bits
     consts, _, rules, segment_symbols = system
-    if customSystem is not None:
+    if customSystem is None:
         # Variables are the left side of the dictionary of the system
         variables = list(rules.keys())
         # Count the number of variables in the string
