@@ -4,67 +4,73 @@ import matplotlib.pyplot as plt
 import systems
 from systems import names, max_vars
 
-
+# Generates a list that contains the line lengths and turn angles
+# that the system gives rise to,
+# detecting the system identity among the predefined system
+# unless a custom system was used
+# Inputs: a string `string` resulting from iterating an L-system;
+# optionally a tuple `customSystem` describing the custom system
+# that generated `string`, if any.
 def turtleGraph(string, customSystem = None):
-    # Is the string from the L-system for a Sierpinski triangle?
-    # If there is input in customSystem, assign parameters accordingly
     if customSystem is not None:
         system = customSystem
         # The turns for the customSystem are set to 45 degrees left and right
         leftTurn = (1/4)*m.pi
         rightTurn = (-1/4)*m.pi
-    # It must be the Sierpinski system if no customSystem has been defined
-    # and there is in 'A' in the string
+    # If no customSystem has been defined
+    # it has to be a predefined system.
+    # The Sierpinski system string will always contain an 'A',
+    # and the Sierpinski system is the only one that will generate 'A's.
     elif 'A' in string:
         system = systems.sierpinski
-        # The turns for Sierpinski are set to 30 degrees left and right
+        # The turns for Sierpinski are set to 30 degrees each direction
         leftTurn = (1/3)*m.pi
         rightTurn = (-1/3)*m.pi
-        # Set scale factor
         scale_factor = 1/2
-        # The maximum amount of variables returned is 3 per iteration
+        # The number of variables each variable expands to is 3 for both variables
         vars_factor = 3
-    # If none of the above, it's from the Koch curve
+    # The only other predefined system is the Koch curve
     else:
         system = systems.koch
-        # The turns for Koch are set to 30 degrees left and 30 degrees right
+        # The turns for Koch are set to 30 degrees left and 60 degrees right
         leftTurn = (1/3)*m.pi
         rightTurn = (-2/3)*m.pi
-        # Set scale factor
         scale_factor = 1/3
-        # The maximum amount of variables returned is 4 per iteration
         vars_factor = 4
-    # Unpack the system into appropriate bits
+    # Unpack the system into appropriate parts
     consts, _, rules, segment_symbols = system
     if customSystem is None:
-        # Variables are the left side of the dictionary of the system
+        # Variables are the left hand side of the dictionary of the system
         variables = list(rules.keys())
-        # Count the number of variables in the string
+        # Count the total number of variables in the string
         num_vars = sum(string.count(v) for v in variables)
-        # Figure out the scale by computing the scale_factor to the i'th power
+        # After i iterations,
+        # num_vars = vars_factor**i
         i = m.log(num_vars, vars_factor)
         scale = scale_factor**i
-    # A custom made system won't be scaled
+    # A custom system won't be scaled
     else:
         scale = 1
     # Make an empty list to be filled with lengths and angles
-    pairs = []
+    values = []
     # Translate the string to pairs of line_lengths and angles
-    # Add a length of line every time one of the segment symbols is encountered
-    # Otherwise add nothing
-    # Translate all L's to leftTurns and R's to rightTurns
     for c in string:
+        # Add a length of line every time one of the segment symbols is encountered
         line_length = scale if c in segment_symbols else 0
+        # Translate all L's to leftTurns and R's to rightTurns of no length
         if c == 'L':
             angle = leftTurn
         elif c == 'R':
             angle = rightTurn
         else:
             angle = 0
-        # Add them pairwise to the list pairs
-        pairs.append(line_length)
-        pairs.append(angle)
-    return pairs
+        # Add them pairwise to the list of values
+        # Potentially slow,
+        # could be sped up if necessary
+        # by pre-allocating a list of the proper length
+        values.append(line_length)
+        values.append(angle)
+    return values
 
 def turtlePlot(turtleCommands, name=None):
     # Takes every second value starting from the second
