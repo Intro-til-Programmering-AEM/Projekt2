@@ -83,7 +83,7 @@ while True:
                 turtlePlot(turtleGraph(iterate(system, N), system if custom else None),name)
             else:
                 print("Please choose both your desired L-system and number of iterations first")
-        #Main menu option 3 - Exit
+        #Main menu option 4 - Exit
         elif option == 4:
             print("Thank you for using the Lindenmayer system playground")
             # Exit properly

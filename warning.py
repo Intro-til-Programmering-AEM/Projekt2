@@ -9,7 +9,7 @@ def shouldWarn(system,N):
     bound = max_vars(system)
     if bound == 1:
         return False
-    return N > m.log(threshold,bound) #For bad computer
+    return N > m.log(threshold,bound)
 
 # A function that returns the maximum number of variables a single variable can produce
 # for a given system
