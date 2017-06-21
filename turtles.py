@@ -11,6 +11,12 @@ from systems import names, max_vars
 # Inputs: a string `string` resulting from iterating an L-system;
 # optionally a tuple `customSystem` describing the custom system
 # that generated `string`, if any.
+# Output: a list of line lengths followed by turn angles,
+# representing the movement necessary to plot `string`.
+# Assumptions: `string` is a valid string, i.e.
+# iterating one of the predefined L-systems,
+# or, if given, the custom L-system
+# could have produced `string`.
 def turtleGraph(string, customSystem = None):
     if customSystem is not None:
         system = customSystem
@@ -72,30 +78,45 @@ def turtleGraph(string, customSystem = None):
         values.append(angle)
     return values
 
+# Takes a list of the format turtleGraph creates
+# and plots it, generating the coordinates
+# for the ends of the line segments along the way.
+# Can optionally include the name of the L-system in the plot title,
+# if given.
+# Inputs: a list of line lengths followed by their turn angles;
+# optionally the name of the L-system the curve was generated from.
+# Outputs: none, but shows a plot.
 def turtlePlot(turtleCommands, name=None):
-    # Takes every second value starting from the second
-    angles=turtleCommands[1::2]
+    # Splits up the line lengths and turn angles
+    # Every second value starting from the zeroth
+    # resp. first is a line length resp. turn angle.
+    steps = turtleCommands[::2]
+    angles = turtleCommands[1::2]
     # Extra value inserted due to range in for loop
-    angles=np.insert(angles, 0, 0) # (index, value)
-    steps=turtleCommands[::2]
-    steps=np.insert(steps, 0, 0) # (index, value)
-    # Same number of d-values as number of angles
-    dvalues = [0 for _ in angles]
-    # Startvalue
+    # The argument order of np.insert is (vector, index, value)
+    angles = np.insert(angles, 0, 0)
+    steps = np.insert(steps, 0, 0)
+
+    # Same number of values as number of angles
+    dvalues = [None for _ in angles]
+    xvalues = [None for _ in angles]
+
+    # Initial values
     dvalues[0]=(np.array([1,0]))
-    xvalues = [0 for _ in angles]
     xvalues[0]=(np.array([0,0]))
-    # Calculating d- and x-values
-    # Output = vector of coordinates
+
+    # Start looping from 1,
+    # as the initial value is already defined
     for i in range(1,len(angles)):
         dvalues[i] = np.dot(np.array([[ m.cos(angles[i]), -m.sin(angles[i])],
                [m.sin(angles[i]), m.cos(angles[i])]]),dvalues[i-1])
         xvalues[i] = xvalues[i-1]+steps[i]*dvalues[i]
-    # Unpacks vector of datasets
-    plt.plot(*zip(*xvalues)) # Plot line graph of x and y
-    # Plottols
-    if name is not None:
-        plt.title(name)
+    # Unpacks vector of (x,y) coordinates into tuple of lists of x and y values
+    # which is then unpacked so plt.plot(list of x-values, list of y-values)
+    # is eventually called
+    plt.plot(*zip(*xvalues))
+    if name is None:
+        plt.title("Your plot of choice")
     else:
-        plt.title("Your plot of choice:")
+        plt.title(name)
     plt.show()
