@@ -121,7 +121,7 @@ def input_int_constrained(request, test, error):
             else:
                 raise ValueError
         except ValueError:
-            print("Please input a non-negative integer")
+            print(error)
         except EOFError:
             return None
 
