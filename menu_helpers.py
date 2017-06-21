@@ -12,9 +12,14 @@ def menu(options):
                                  lambda x: x > 0 and x <= len(options),
                                  "Please input a number corresponding to the option you want to select.")
 
-
+# This functions takes as request, which lets the user know what kind of input
+# is expected. The test is a function that returns True or False, and only if
+# True is returned will x be returned. Otherwise an appropriate error-message
+# will be printed.
 def input_int_constrained(request, test, error):
     while True:
+        # Return None if no input is given. Otherwise, x will be the input
+        # of the user as long as the test is passed
         try:
             x = int(input_wrapper(request))
             if test(x):
