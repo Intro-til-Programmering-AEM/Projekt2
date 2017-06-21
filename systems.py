@@ -28,7 +28,7 @@ names = {
     "Sierpinski": sierpinski
 }
 
-# Iterates an L-system N times from the initial string
+# Iterates an L-system N times from its initial string
 # Inputs: a string `System` naming the L-system to be iterated;
 # a non-negative integer `N`, the number of iterations to be performed.
 # Output: a string of valid symbols.
@@ -38,10 +38,11 @@ names = {
 def LindIter(System, N):
     # Look up tuple of system description based on input string
     system = names[System]
+    # Then delegate the actual work to iterate
     return iterate(system, N)
 
 
-# Iterates an L-system N times from the initial string
+# Iterates an L-system N times from its initial string
 # Inputs: a tuple `system` describing the L-system to be iterated;
 # a non-negative integer `N`, the number of iterations to be performed.
 # Output: a string of valid symbols.
@@ -50,7 +51,6 @@ def LindIter(System, N):
 def iterate(system, N):
     # Second tuple element is the initial string
     string = system[1]
-    # Repeatedly iterate
     for _ in range(N):
         string = step_unsafe(system, string)
     return string
@@ -58,13 +58,13 @@ def iterate(system, N):
 # Iterates an L-system once, without checking whether the symbols are legal.
 # Inputs: a tuple `system` which represents the the L-system;
 # a string of valid symbols to perform the iteration over.
-# Output: a string `string` of valid symbols resulting from the iteration
+# Output: a string `string` of valid symbols resulting from the iteration.
 # Assumptions: `string` contains only legal symbols.
 def step_unsafe(system, string):
     # Unpacks needed parts of tuple
     consts, _, dict, _ = system
     # Maps every symbol to a string
-    # Constant symbols are mapped to a string containing themself
+    # Any constant symbol is mapped to a string containing itself
     # Variable symbols are mapped according to the replacement rules of the L-system
     replaced = map(lambda s: str(s) if s in consts else dict[s], string)
     # Joins all resulting strings into a single string of symbols, and returns it
