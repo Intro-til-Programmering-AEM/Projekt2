@@ -1,3 +1,33 @@
+# Computer-friendly descriptions of the L-systems are defined in this module.
+# These will be constants used throughout the program where access to
+# a specific, predefined system is needed.
+# Functions for working with them (e.g. iterating them) are also defined.
+
+# A dictionary mapping symbols to strings
+# as determined by the rules for the system.
+koch_dict = {
+    'S': "SLSRSLS",
+}
+
+# A tuple (constant symbols, initial string, variable replacement rules, symbols representing line segments),
+# which contains information fully describing the system.
+koch = (['L','R'], "S", koch_dict, ['S'])
+
+
+sierpinski_dict = {
+    'A': "BRARB",
+    'B': "ALBLA",
+}
+
+sierpinski = (['L','R'], "A", sierpinski_dict, ['A', 'B'])
+
+# A dictionary mapping the name of the system as given in the specification
+# to the system tuple as defined in this module.
+names = {
+    "Koch": koch,
+    "Sierpinski": sierpinski
+}
+
 # Iterates an L-system N times from the initial string
 # Inputs: a string `System` naming the L-system to be iterated;
 # a non-negative integer `N`, the number of iterations to be performed.
@@ -10,30 +40,15 @@ def LindIter(System, N):
     system = names[System]
     return iterate(system, N)
 
-koch_dict = {
-    'S': "SLSRSLS",
-}
-koch = (['L','R'], "S", koch_dict, ['S'])
-
-sierpinski_dict = {
-    'A': "BRARB",
-    'B': "ALBLA",
-}
-sierpinski = (['L','R'], "A", sierpinski_dict, ['A', 'B'])
-
-names = {
-    "Koch": koch,
-    "Sierpinski": sierpinski
-}
 
 # Iterates an L-system N times from the initial string
 # Inputs: a tuple `system` describing the L-system to be iterated;
 # a non-negative integer `N`, the number of iterations to be performed.
 # Output: a string of valid symbols.
-# Assumptions: `N` is a non-negative integers
+# Assumptions: `N` is a non-negative integer
 # (iterating 0 times returns the initial string)
 def iterate(system, N):
-    # second tuple element is the initial string
+    # Second tuple element is the initial string
     string = system[1]
     # Repeatedly iterate
     for _ in range(N):
@@ -41,8 +56,7 @@ def iterate(system, N):
     return string
 
 # Iterates an L-system once, without checking whether the symbols are legal.
-# Inputs: a tuple `system` (variable symbols, constant symbol, variable replacement rules, initial string),
-# which represents the the L-system;
+# Inputs: a tuple `system` which represents the the L-system;
 # a string of valid symbols to perform the iteration over.
 # Output: a string `string` of valid symbols resulting from the iteration
 # Assumptions: `string` contains only legal symbols.
@@ -52,17 +66,21 @@ def step_unsafe(system, string):
     # Maps every symbol to a string
     # Constant symbols are mapped to a string containing themself
     # Variable symbols are mapped according to the replacement rules of the L-system
-    # Joins all resulting strings into a single string of symbols, and returns it
     replaced = map(lambda s: str(s) if s in consts else dict[s], string)
+    # Joins all resulting strings into a single string of symbols, and returns it
     return "".join(replaced)
 
 # Iterates an L-system once.
 # Inputs: a tuple representing the L-system; a string of (possibly invalid) symbols.
 # Output: A string of valid symbols.
 # Errors: Throws AssertionError if not all symbols in the input string are valid.
+# Not used in the program as we only step in conditions that have already been confirmed
+# not to contain or generate illegal symbols,
+# but included for completeness.
 def step(system, string):
     # Unpacks tuple
     consts, _, rules, _ = system
+    # The variables are the symbols that replacement rules exist for
     variables = list(rules.keys())
     # Concatenates the two lists to form a list of all valid symbols
     symbols = variables + consts
