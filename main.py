@@ -14,9 +14,10 @@ system_options = (["Koch's curve", "Sierpinski's triangle"])
 
 
 print("Welcome to the Lindenmayer system playground! :D\n")
+print("Here's an example of what you can make:")
 # Shows "splash screen" image of example fractal
 # that can be generated using the program
-plt.imshow(img.imread('drage.jpg'))
+plt.imshow(img.imread('dragon.png'))
 plt.axis('off')
 plt.show()
 
