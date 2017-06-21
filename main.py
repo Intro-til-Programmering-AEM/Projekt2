@@ -15,6 +15,9 @@ system = None
 N = None
 custom = False
 print("Welcome to the Lindenmayer system playground! :D\n")
+# Shows funny image
+plt.imshow(img.imread('drage.jpg'))
+plt.show()
 while True:
     # Main menu
     if system is not None:
@@ -54,9 +57,6 @@ while True:
                     # Warning message if N is too high
                     if system is not None and shouldWarn(system,N):
                         print("N is very high! Are you sure you want to continue with this number of iterations?")
-                        # Shows funny image
-                        plt.imshow(img.imread('meme.jpg'))
-                        plt.show()
                         # yes/no menu
                         warn_choice=menu(["Yes", "No"])
                         # Continiues anyway
@@ -77,7 +77,7 @@ while True:
                 # Plots
                 turtlePlot(turtleGraph(iterate(system, N), system if custom else None),name)
             else:
-                print("Please choose your desired L-system and number of iterations first")
+                print("Please choose both your desired L-system and number of iterations first")
         elif option == 4:
             print("Thank you for using the Lindenmayer system playground")
             # Exit properly
