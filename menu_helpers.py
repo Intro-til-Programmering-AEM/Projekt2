@@ -1,5 +1,9 @@
 #Menu haandtering projekt 2
 
+# Creates a menu
+# Takes a userinput
+# Returns the selected option
+# Asks for input again if it does not correspont with a menu option
 def menu(options):
     # Print options with option numbers
     for i in range(len(options)):
@@ -7,6 +11,7 @@ def menu(options):
     return input_int_constrained("Select an option: ",
                                  lambda x: x > 0 and x <= len(options),
                                  "Please input a number corresponding to the option you want to select.")
+
 
 def input_int_constrained(request, test, error):
     while True:
@@ -64,7 +69,7 @@ Please note:
 You must now define your variables.
 Please note: the same symbol cannot be used as both a variable and a constant.
 """)
-    # The user chooses variables. Can't be predefined constants or constants.
+    # The user chooses variables. Can't be constants (includes L and R).
     variable_string = input_legal_string("containing all your variables", lambda c: c not in constants+predefined, "Symbols cannot be both constants and variables!")
     if variable_string is None:
         return None
@@ -102,6 +107,7 @@ We encourage you to create rules with more than one symbol
 and include L and R if you want the curve to bend.
 """)
     for c in variables:
+        # Asks what the variables should be replaced with
         rule_string = input_legal_string("which "+str(c)+" should be replaced with", lambda c: c in symbols+predefined)
         if rule_string is None:
             return None
